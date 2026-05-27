@@ -101,7 +101,7 @@ export function RecommendationCard({
           </div>
 
           {/* Battery Name */}
-          <h3 className="mt-4 text-[34px] leading-none font-extrabold tracking-tight text-black">
+          <h3 className="mt-4 text-[34px] leading-none font-semibold tracking-tight text-black">
             {rec.battery_model}
           </h3>
 
