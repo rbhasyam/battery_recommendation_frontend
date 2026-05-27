@@ -6,7 +6,7 @@
 }
 
 body {
-  background: var(--background);
+  background: #f3f4f6;
   color: var(--foreground);
   font-family: Inter, sans-serif;
 }

@@ -2,29 +2,32 @@ import type { Recommendation, StructuredFields } from "@/lib/api";
 
 const rankStyles: Record<number, { badge: string; ring: string; label: string }> = {
   1: {
-    badge: "bg-[var(--color-rank-gold)] text-white",
-    ring: "ring-[var(--color-rank-gold)]",
+    badge: "bg-green-500 text-white",
+    ring: "border-green-400",
     label: "1st",
   },
   2: {
-    badge: "bg-[var(--color-rank-silver)] text-white",
-    ring: "ring-[var(--color-rank-silver)]",
+    badge: "bg-blue-500 text-white",
+    ring: "border-blue-400",
     label: "2nd",
   },
   3: {
-    badge: "bg-[var(--color-rank-bronze)] text-white",
-    ring: "ring-[var(--color-rank-bronze)]",
+    badge: "bg-yellow-600 text-white",
+    ring: "border-yellow-500",
     label: "3rd",
   },
 };
 
 function Pill({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="inline-flex flex-col rounded-md bg-muted px-3 py-1.5 text-left">
-      <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
+    <div className="rounded-lg bg-[#f3f0eb] px-3 py-2 min-w-[58px]">
+      <div className="text-[10px] uppercase text-gray-500 font-medium">
         {label}
-      </span>
-      <span className="text-sm font-semibold text-foreground">{value}</span>
+      </div>
+
+      <div className="text-[22px] leading-none font-bold text-black mt-1">
+        {value || "-"}
+      </div>
     </div>
   );
 }
@@ -41,11 +44,16 @@ function CompareRow({
   diff?: string;
 }) {
   return (
-    <div className="grid grid-cols-[1.2fr_1fr_1fr_0.8fr] gap-2 border-b py-2 text-sm items-center">
-      <span className="font-medium text-foreground">{label}</span>
-      <span className="text-muted-foreground">{input || "-"}</span>
-      <span className="font-semibold text-foreground">{output}</span>
-      <span className="font-semibold text-right text-primary">{diff || "-"}</span>
+    <div className="grid grid-cols-[1.2fr_1fr_1fr_0.7fr] gap-2 border-b border-gray-200 py-3 text-sm items-center">
+      <span className="font-semibold text-black">{label}</span>
+
+      <span className="text-gray-600">{input || "-"}</span>
+
+      <span className="font-semibold text-black">{output}</span>
+
+      <span className="text-right font-semibold text-red-500">
+        {diff || "-"}
+      </span>
     </div>
   );
 }
@@ -74,35 +82,38 @@ export function RecommendationCard({
 
   return (
     <div
-      className={`rounded-xl border bg-card p-5 shadow-sm ring-1 ${style.ring} ring-opacity-20`}
+      className={`rounded-2xl border-2 bg-white p-6 shadow-sm ${style.ring}`}
     >
-      <div className="flex items-start justify-between gap-3">
+      {/* Header */}
+      <div className="flex items-start justify-between">
         <div>
-          {/* Rank Badge + Match Percentage */}
-          <div className="flex items-center gap-2">
+          {/* Rank + Match */}
+          <div className="flex items-center gap-3">
             <span
-              className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${style.badge}`}
+              className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold ${style.badge}`}
             >
               {style.label}
             </span>
 
-            <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-700">
+            <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-700">
               {rec.match_percentage}% Match
             </span>
           </div>
 
-          <h3 className="mt-2 text-lg font-bold text-foreground">
+          {/* Battery Name */}
+          <h3 className="mt-4 text-[34px] leading-none font-extrabold tracking-tight text-black">
             {rec.battery_model}
           </h3>
 
-          <p className="text-xs text-muted-foreground">
+          {/* Subtitle */}
+          <p className="mt-2 text-sm text-gray-600">
             {rec.series} series · BCI {rec.bci_group} · {rec.terminal}
           </p>
         </div>
       </div>
 
-      {/* Battery Specs */}
-      <div className="mt-4 flex flex-wrap gap-2">
+      {/* Specs */}
+      <div className="mt-6 flex flex-wrap gap-3">
         <Pill label="Ref Ah" value={rec.ref_ah} />
         <Pill label="CCA @0°F" value={rec.cca_0f} />
         <Pill label="CA @32°F" value={rec.ca_32f} />
@@ -110,12 +121,12 @@ export function RecommendationCard({
       </div>
 
       {/* Dimension Comparison */}
-      <div className="mt-5 rounded-lg border p-4">
-        <h4 className="mb-3 text-sm font-bold text-foreground">
+      <div className="mt-6 rounded-2xl border border-gray-300 p-5">
+        <h4 className="mb-5 text-[22px] font-bold text-black">
           Dimension Comparison (mm)
         </h4>
 
-        <div className="grid grid-cols-[1.2fr_1fr_1fr_0.8fr] gap-2 border-b pb-2 text-[11px] font-semibold uppercase text-muted-foreground">
+        <div className="grid grid-cols-[1.2fr_1fr_1fr_0.7fr] gap-2 border-b border-gray-300 pb-3 text-[11px] uppercase tracking-wide text-gray-500 font-semibold">
           <span>Spec</span>
           <span>Input</span>
           <span>Reco</span>
@@ -145,12 +156,12 @@ export function RecommendationCard({
       </div>
 
       {/* Performance Comparison */}
-      <div className="mt-5 rounded-lg border p-4">
-        <h4 className="mb-3 text-sm font-bold text-foreground">
+      <div className="mt-6 rounded-2xl border border-gray-300 p-5">
+        <h4 className="mb-5 text-[22px] font-bold text-black">
           Performance Comparison
         </h4>
 
-        <div className="grid grid-cols-[1.2fr_1fr_1fr_0.8fr] gap-2 border-b pb-2 text-[11px] font-semibold uppercase text-muted-foreground">
+        <div className="grid grid-cols-[1.2fr_1fr_1fr_0.7fr] gap-2 border-b border-gray-300 pb-3 text-[11px] uppercase tracking-wide text-gray-500 font-semibold">
           <span>Spec</span>
           <span>Input</span>
           <span>Reco</span>
@@ -186,10 +197,12 @@ export function RecommendationCard({
         />
       </div>
 
-      <p className="mt-4 border-t pt-3 text-sm text-muted-foreground">
-        <span className="font-semibold text-foreground">Why: </span>
-        {rec.why}
-      </p>
+      {/* Why */}
+      <div className="mt-5 border-t border-gray-200 pt-4">
+        <span className="font-bold text-black">Why: </span>
+
+        <span className="text-gray-600">{rec.why}</span>
+      </div>
     </div>
   );
 }
