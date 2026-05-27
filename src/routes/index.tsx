@@ -232,7 +232,7 @@ function Home() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-cyan-500/5" />
 
-        <div className="mx-auto max-w-7xl px-6 py-14">
+        <div className="mx-auto max-w-[1400px] px-6 py-10">
 
           <div className="max-w-3xl">
 
@@ -240,7 +240,7 @@ function Home() {
               AI Recommendation Engine
             </div>
 
-            <h2 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-5xl">
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-slate-900 md:text-4xl">
               Find the Perfect Battery
               <span className="block bg-gradient-to-r from-indigo-600 to-cyan-500 bg-clip-text text-transparent">
                 in Seconds
@@ -257,12 +257,12 @@ function Home() {
       </section>
 
       {/* MAIN */}
-      <main className="mx-auto max-w-7xl px-6 pb-20">
+      <main className="mx-auto max-w-[1400px] px-6 pb-14">
 
         {/* FORM */}
         <form
           onSubmit={onSubmit}
-          className="rounded-3xl border border-white/40 bg-white/70 p-8 shadow-2xl backdrop-blur-xl"
+          className="rounded-3xl border border-white/40 bg-white/70 p-6 shadow-xl backdrop-blur-xl"
         >
 
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
@@ -441,20 +441,20 @@ function Home() {
 
         {/* RESULTS */}
         {result && (
-          <section className="mt-10 space-y-8">
+          <section className="mt-8 space-y-5">
 
-            <div className="rounded-3xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-cyan-50 p-7 shadow-sm">
+            <div className="rounded-3xl border border-indigo-100 bg-gradient-to-r from-indigo-50 to-cyan-50 p-5 shadow-sm">
 
               <div className="mb-3 text-sm font-semibold uppercase tracking-wider text-indigo-700">
                 AI Recommendation Summary
               </div>
 
-              <p className="text-lg leading-8 text-slate-700">
+              <p className="text-base leading-7 text-slate-700">
                 {result.summary}
               </p>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-5 lg:grid-cols-3">
               {result.recommendations.map((r) => (
                 <div
                   key={`${r.rank}-${r.battery_model}`}
