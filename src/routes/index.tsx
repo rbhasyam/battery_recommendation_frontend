@@ -232,9 +232,9 @@ function Home() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/5 to-cyan-500/5" />
 
-        <div className="mx-auto max-w-[1400px] px-6 py-10">
+        <div className="mx-auto max-w-screen-2xl px-6 py-10">
 
-          <div className="max-w-3xl">
+          <div className="max-w-2xl">
 
             <div className="mb-5 inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1 text-sm font-medium text-indigo-700">
               AI Recommendation Engine
@@ -257,7 +257,7 @@ function Home() {
       </section>
 
       {/* MAIN */}
-      <main className="mx-auto max-w-[1400px] px-6 pb-14">
+      <main className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 xl:px-10 pb-14">
 
         {/* FORM */}
         <form
